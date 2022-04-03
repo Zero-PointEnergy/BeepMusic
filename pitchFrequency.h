@@ -168,3 +168,6 @@
 #define sharpA8 7458.62
 #define flatB8 7458.62
 #define B8 7902.13
+
+// rest(s) 作为空拍
+#define rest 0
