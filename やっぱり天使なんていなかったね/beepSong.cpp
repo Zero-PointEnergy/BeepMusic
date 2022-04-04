@@ -29,6 +29,12 @@ typedef struct {
 
 // 乐谱，右手演奏部分，即双行五线谱的上面那行
 staff stfRightHand[] = {
+    // bar 0
+    // bar 0 部分是空拍，这里放了个四分休止符
+    // 源谱并没有这个 bar 0 部分，若不加上去会导致 bar 1 部分的音符播放不正常
+    // 若没有 bar 0 仍能正常播放的话，可以去掉它
+    // 若没有 bar 0 部分后播放异常，请务必加上它，建议设置它的时值至少为 crotchetDuration ，即四分音符时值
+    rest,crotchetDuration,
     // bar 1
     flatD6,quaverDuration,C6,quaverDuration,flatA5,quaverDuration,flatB5,quaverDuration,rest,minimDuration,
     // bar 2
@@ -137,6 +143,11 @@ staff stfRightHand[] = {
 
 // 乐谱，左手演奏部分，即双行五线谱的下面那行
 staff stfLeftHand[] = {
+    // bar 0
+    // bar 0 部分是空拍，这里放了个四分休止符
+    // 源谱并没有这个 bar 0 部分，若不加上去，也并不会出现任何问题
+    // 我在这放了个四分休止符的目的只是为了跟 stfRightHand 保持一致XD
+    rest,crotchetDuration,
     // bar 1
     rest,crotchetDuration,rest,quaverDuration,flatG3,quaverDuration,flatB3,quaverDuration,flatD4,quaverDuration,flatG4,quaverDuration,flatE4,quaverDuration,
     // bar 2
@@ -243,22 +254,30 @@ staff stfLeftHand[] = {
     rest,semibreveDuration
 };
 
+time_t startTime, endTime;
+
 void playStfRightHand() {
+    startTime = clock();
     cout << "Start Playing staff(R)" << endl;
     Beep(rest,Tempo);
     for (int i=0; i<sizeof(stfRightHand)/sizeof(staff); i++) {
-       Beep(stfRightHand[i].frequency,stfRightHand[i].duration);
-       cout << "R => " << stfRightHand[i].frequency << "\t" << stfRightHand[i].duration << endl;
+        cout << "R => " << stfRightHand[i].frequency << "\t" << stfRightHand[i].duration << endl;
+        Beep(stfRightHand[i].frequency,stfRightHand[i].duration);
     }
+    endTime = clock();
+    cout << "Total time taken: " << (endTime - startTime) / (double) CLOCKS_PER_SEC << " seconds" << endl;
 }
 
 void playStfLeftHand() {
+    startTime = clock();
     cout << "Start Playing staff(L)" << endl;
     Beep(rest,Tempo);
     for (int i=0; i<sizeof(stfLeftHand)/sizeof(staff); i++) {
-       Beep(stfLeftHand[i].frequency,stfLeftHand[i].duration);
-       cout << "L => " << stfLeftHand[i].frequency << "\t" << stfLeftHand[i].duration << endl;
+        cout << "L => " << stfLeftHand[i].frequency << "\t" << stfLeftHand[i].duration << endl;
+        Beep(stfLeftHand[i].frequency,stfLeftHand[i].duration);
     }
+    endTime = clock();
+    cout << "Total time taken: " << (endTime - startTime) / (double) CLOCKS_PER_SEC << " seconds" << endl;
 }
 
 int main(int argc, char const *argv[]) {
