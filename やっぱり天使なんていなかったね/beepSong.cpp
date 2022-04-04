@@ -29,8 +29,6 @@ typedef struct {
 
 // 乐谱，右手演奏部分，即双行五线谱的上面那行
 staff stfRightHand[] = {
-    // bar 0
-    // rest,crotchetDuration,
     // bar 1
     flatD6,quaverDuration,C6,quaverDuration,flatA5,quaverDuration,flatB5,quaverDuration,rest,minimDuration,
     // bar 2
@@ -40,7 +38,7 @@ staff stfRightHand[] = {
     // bar 4
     flatD5,quaverDuration,flatE5,quaverDuration,F5,crotchetDuration,flatA5,crotchetDuration,flatE5,crotchetDuration,
     // bar 5
-    flatA5,crotchetDuration,/* 这里是二分附点音符连音琶音开始，但是我现在不知道该怎么实现这个效果 */F4,crotchetDuration,flatD5,crotchetDuration,F5,crotchetDuration,
+    flatA5,crotchetDuration,/* 这里是二分附点音符连音琶音开始，但是我现在不知道该怎么实现这个效果 */F4,(crotchetDuration),flatD5,(crotchetDuration),F5,(minimDuration),
     // bar 6
     /*F4,1,flatD5,1,F5,1,*//* 到这里结束,后面开始升八度 */flatB5,quaverDuration,F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,
     // bar 7
@@ -52,19 +50,19 @@ staff stfRightHand[] = {
     // bar 10
     flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,rest,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,
     // bar 11
-    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F5,quaverDuration,flatB6,quaverDuration,
+    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,
     // bar 12
     flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,rest,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,
     // bar 13
-    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F5,quaverDuration,flatB6,quaverDuration,
+    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,
     // bar 14
     flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,rest,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,
     // bar 15
-    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F5,quaverDuration,flatB6,quaverDuration,
+    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,
     // bar 16
     flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,rest,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,
     // bar 17
-    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F5,quaverDuration,flatB6,quaverDuration,
+    F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,
     // bar 18
     flatB5,quaverDuration,F6,quaverDuration,flatB6,quaverDuration,rest,quaverDuration,flatB5,quaverDuration,F6,quaverDuration,flatA6,quaverDuration,flatB5,quaverDuration,
     // bar 19
@@ -268,9 +266,9 @@ int main(int argc, char const *argv[]) {
     // 这个问题暂时没有解决
     cout << "Thread started" << endl;
     thread playStaffRightHand(playStfRightHand);
-    thread playStaffLeftHand(playStfLeftHand);
+    // thread playStaffLeftHand(playStfLeftHand);
     playStaffRightHand.join();
-    playStaffLeftHand.join();
+    // playStaffLeftHand.join();
     cout << "Thread ended" << endl;
     return 0;
 }
